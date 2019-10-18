@@ -1,0 +1,35 @@
+<%= form_with(model: @task, local: true) do |form| %>
+
+<h1>新規作成画面</h1>
+
+  <div class="task_name">
+    <%= form.label :タスク名 %>
+    <%= form.text_field :task_name %>
+  </div>
+  <div class="task_details">
+    <%= form.label :タスク詳細 %>
+    <%= form.text_field :task_details %>
+  </div>
+  <div class="end_period">
+    <%= form.label :終了期間 %>
+    <%= form.text_field :end_period %>
+  </div>
+  <div class="task_status">
+    <%= form.label :状態 %>
+    <%= form.text_field :task_status %>
+  </div>
+  <div class="priority">
+    <%= form.label :優先順位 %>
+    <%= form.text_field :priority %>
+  </div>
+  <div class="author">
+    <%= form.label :作者 %>
+    <%= form.text_field :author %>
+  </div>
+
+
+  <%= form.submit %>
+<% end %>
+
+
+<%= link_to '一覧画面へ',tasks_path %>
