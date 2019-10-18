@@ -1,0 +1,32 @@
+<h1>タスク一覽</h1>
+
+<p><%= notice %></p>
+
+  <table>
+    <tr>
+      <th>タスク名</th>
+      <th>タスク詳細</th>
+      <th>終了期間</th>
+      <th>状態</th>
+      <th>優先順位</th>
+      <th>作者</th>
+      <th>詳細</th>
+      <th>編集</th>
+      <th>削除</th>
+    </tr>
+
+    <% @tasks.each do |task| %>
+      <tr>
+        <td><%= task.task_name %></td>
+        <td><%= task.task_details %></td>
+        <td><%= task.end_period %></td>
+        <td><%= task.task_status %></td>
+        <td><%= task.priority %></td>
+        <td><%= task.author %></td>
+
+        <td><%= link_to '詳細', task_path(task.id)%></td>
+        <td><%= link_to '編集', edit_task_path(task.id), date:{ confirm: '本当に編集しますか'}  %></td>
+        <td><%= link_to '削除', task_path(task.id), method: :delete, date:{ confirm: '本当に削除しますか'} %></td>
+      </tr>
+    <% end %>
+  </table>

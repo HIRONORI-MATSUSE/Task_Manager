@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  task_name: MyString
+  task_details: MyString
+  end_period: MyString
+  task_status: MyString
+  priority: MyString
+  author: MyString
+
+two:
+  task_name: MyString
+  task_details: MyString
+  end_period: MyString
+  task_status: MyString
+  priority: MyString
+  author: MyString

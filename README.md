@@ -10,6 +10,7 @@
 ### Taskテーブル
 |カラム名  |データ型  |
 |---|---|
+|user id(fk) |integer|
 |task_name  |string  |
 |task_details  |string  |
 |end_period |string|
@@ -17,10 +18,15 @@
 |priority  |string  |
 |author |string|
 
+
 ### labelテーブル
 |カラム名  |データ型  |
 |---|---|
-||  |
-|  |  |
-|  |  |
-|  |  |
+|user_id |integer |
+|name |string |
+
+### labellingテーブル
+|カラム名  |データ型  |
+|---|---|
+|label_id(fk)|integer |
+|task_id |integer |
