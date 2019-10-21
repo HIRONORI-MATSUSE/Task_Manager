@@ -145,6 +145,9 @@ ja:
       create: 登録する
       submit: 保存する
       update: 更新する
+    label:
+      email: "メールアドレス"
+      password: "パスワード"
   number:
     currency:
       format:
@@ -206,19 +209,19 @@ ja:
       short: "%m/%d %H:%M"
     pm: 午後
   view:
-      task_name: タスク名
-      task_details: タスク詳細
-      end_period: 終了期間
-      task_status: 状態
-      priority: 優先順位
-      author: 作者
-      show: 詳細
-      edit: 編集
-      destroy: 削除
-      To list screen: 一覽画面へ
-      Editing screen: 編集画面
-      Do you really want to edit it?: 本当に編集しますか?      
-      Do you really want to delete this?: 本当に削除しますか?    
-      Task list: タスク一覧
-      New creation screen: 新規作成画面
-      Task details screen: タスク詳細画面
+    task_name: タスク名
+    task_details: タスク詳細
+    end_period: 終了期間
+    task_status: 状態
+    priority: 優先順位
+    author: 作者
+    show: 詳細
+    edit: 編集
+    destroy: 削除
+    To list screen: 一覽画面へ
+    Editing screen: 編集画面
+    Do you really want to edit it?: 本当に編集しますか?      
+    Do you really want to delete this?: 本当に削除しますか?    
+    Task list: タスク一覧
+    New creation screen: 新規作成画面
+    Task details screen: タスク詳細画面

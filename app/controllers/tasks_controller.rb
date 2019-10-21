@@ -5,7 +5,6 @@ class TasksController < ApplicationController
     #reverse_orderとする事で降順で並ぶ。
     # @tasks = Task.all.reverse_order
     @tasks = Task.all.order(created_at: :desc)
-    
   end
 
   def new

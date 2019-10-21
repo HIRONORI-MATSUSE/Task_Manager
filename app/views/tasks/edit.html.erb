@@ -1,29 +1,29 @@
 <%= form_with(model: @task, local: true) do |form| %>
 
-<h1>編集画面</h1>
+<h1><%= t('view.Editing screen') %></h1>
 
   <div class="task_name">
-    <%= form.label :タスク名 %>
+    <%= form.label :task_name %>
     <%= form.text_field :task_name %>
   </div>
   <div class="task_details">
-    <%= form.label :タスク詳細 %>
+    <%= form.label :task_details %>
     <%= form.text_field :task_details %>
   </div>
   <div class="end_period">
-    <%= form.label :終了期間 %>
+    <%= form.label :end_period %>
     <%= form.text_field :end_period %>
   </div>
   <div class="task_status">
-    <%= form.label :状態 %>
+    <%= form.label :task_status %>
     <%= form.text_field :task_status %>
   </div>
   <div class="priority">
-    <%= form.label :優先順位 %>
+    <%= form.label :priority %>
     <%= form.text_field :priority %>
   </div>
   <div class="author">
-    <%= form.label :作者 %>
+    <%= form.label :author %>
     <%= form.text_field :author %>
   </div>
 
@@ -32,4 +32,4 @@
 <% end %>
 
 
-<%= link_to '一覧画面へ',tasks_path %>
+<%= link_to t('view.To list screen'),tasks_path %>
