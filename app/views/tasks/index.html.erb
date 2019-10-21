@@ -25,8 +25,8 @@
         <td><%= task.author %></td>
 
         <td><%= link_to '詳細', task_path(task.id)%></td>
-        <td><%= link_to '編集', edit_task_path(task.id), date:{ confirm: '本当に編集しますか'}  %></td>
-        <td><%= link_to '削除', task_path(task.id), method: :delete, date:{ confirm: '本当に削除しますか'} %></td>
+        <td><%= link_to '編集', edit_task_path(task.id), date:{ confirm: '本当に編集しますか?'}  %></td>
+        <td><%= link_to '削除', task_path(task.id), method: :delete, date:{ confirm: '本当に削除しますか?'} %></td>
       </tr>
     <% end %>
   </table>
