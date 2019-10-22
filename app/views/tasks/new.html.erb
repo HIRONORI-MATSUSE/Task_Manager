@@ -1,4 +1,15 @@
 <%= form_with(model: @task, local: true) do |form| %>
+  <% if @task.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= @task.errors.count %>件のエラーがあります。</h2>
+      <ul>
+
+      <% @task.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
 
 <h1><%= t('view.New creation screen') %></h1>
 
@@ -12,7 +23,7 @@
   </div>
   <div class="end_period">
     <%= form.label :end_period %>
-    <%= form.text_field :end_period %>
+    <%= form.date_field :end_period %>
   </div>
   <div class="task_status">
     <%= form.label :task_status %>

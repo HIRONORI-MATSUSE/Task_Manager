@@ -30,3 +30,9 @@
 |---|---|
 |label_id(fk)|integer |
 |task_id |integer |
+
+### デプロイの手順
+1. rails assets:precompile RAILS_ENV=production
+1. git add -A
+1. git commit -m "任意のコメント"
+1. git push heroku master

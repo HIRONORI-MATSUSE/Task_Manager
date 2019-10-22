@@ -6,10 +6,10 @@ RSpec.feature "タスク管理機能", type: :feature do
 
   background do
     FactoryBot.create(:task)
-    FactoryBot.create(:second_task, task_name:'test_task_03', task_details:'samplesample')
-    FactoryBot.create(:third_task, task_name:'test_task_02', task_details:'aaaaaaaaaaaa')
+    FactoryBot.create(:second_task)
+    FactoryBot.create(:third_task)
   end
-
+    
   # scenario（itのalias）の中に、確認したい各項目のテストの処理を書きます。
   scenario "タスク一覧のテスト" do
     visit tasks_path
@@ -24,7 +24,12 @@ RSpec.feature "タスク管理機能", type: :feature do
     # タスクのタイトルと内容をそれぞれfill_in（入力）する
     #2.ここに「タスク名」というラベル名の入力欄に内容をfill_in（入力）する処理を書く
     #fillはidを見ている
-    fill_in 'task_task_name', with: 'test_task_01'
+    fill_in 'task_task_name', with: 'test_task_xxx'
+    fill_in 'task_task_details', with: 'test_task_xxx'
+    fill_in 'task_end_period', with: 'test_task_xxx'
+    fill_in 'task_task_status', with: 'test_task_xxx'
+    fill_in 'task_priority', with: 'test_task_xxx'
+    fill_in 'task_author', with: 'test_task_xxx'
     # 「登録する」というvalue（表記文字）のあるボタンをclick_onする（クリックする）
     # 4.「登録する」というvalue（表記文字）のあるボタンをclick_onする（クリックする）する処理を書く
     #save save_and_open_page
@@ -61,7 +66,7 @@ RSpec.feature "タスク管理機能", type: :feature do
     # click_on '登録する'
     tds = page.all('tr td')
 
-    expect(tds[0]).to have_content 'test_task_02'
+    expect(tds[0]).to have_content 'test_task_03'
     # all('table tr')[1]. have_content 'test_task_03'
     #toは〜であること。eqは期待値と実際の値が等しいこと。beは等号、不等号を使用して値の大小を検証する時に使う。
   end
