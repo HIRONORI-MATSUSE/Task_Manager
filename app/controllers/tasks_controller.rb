@@ -2,7 +2,9 @@ class TasksController < ApplicationController
   before_action :set_tasks, only:[:show, :edit, :update, :destroy]
 
   def index
-    @tasks = Task.all
+    #reverse_orderとする事で降順で並ぶ。
+    # @tasks = Task.all.reverse_order
+    @tasks = Task.all.order(created_at: :desc)
   end
 
   def new
