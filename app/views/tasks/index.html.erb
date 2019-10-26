@@ -1,6 +1,18 @@
 <h1><%= t('view.Task list') %></h1>
 
-<p><%= notice %></p>
+<%= form_with(model: Task.new, local: true, method: :get) do |form| %>
+
+  <p><%= notice %></p>
+  <%# <h1>タスク名検索</h1> %>
+  <div class="task_name">
+  <%# <h1>作成順</h1> %>
+  <%= link_to "作成順", tasks_path(cleate_at: "true") %>
+  <%# <h1>終了期限順</h1> %>
+  <%= link_to "終了期限順", tasks_path(end_period: "true") %>
+  <%# <h1>状態順（未着手か着手中か完了)</h1> %>
+  <%= link_to "状態順", tasks_path(task_status: "true") %>
+  <%# <h1>優先順位順</h1> %>
+  <%= link_to "優先順位", tasks_path(priority: "true") %>
 
   <table>
     <tr>
@@ -29,4 +41,5 @@
         <td><%= link_to t('view.destroy'), task_path(task.id), method: :delete, data: { confirm: t('view.Do you really want to delete this?')} %></td>
       </tr>
     <% end %>
+<% end %>
   </table>

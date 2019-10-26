@@ -12,27 +12,32 @@
   <% end %>
 
 <h1><%= t('view.New creation screen') %></h1>
-
+<%# <h1>タスク名</h1> %>
   <div class="task_name">
     <%= form.label :task_name %>
     <%= form.text_field :task_name %>
   </div>
+<%# <h1>タスク詳細</h1> %>
   <div class="task_details">
     <%= form.label :task_details %>
     <%= form.text_field :task_details %>
   </div>
+<%# <h1>終了期限</h1> %>
   <div class="end_period">
     <%= form.label :end_period %>
     <%= form.date_field :end_period %>
   </div>
+<%# <h1>状態（未着手か着手中か完了)</h1> %>
   <div class="task_status">
     <%= form.label :task_status %>
     <%= form.text_field :task_status %>
   </div>
+<%# <h1>優先順位</h1> %>
   <div class="priority">
     <%= form.label :priority %>
     <%= form.text_field :priority %>
   </div>
+<%# <h1>作者</h1> %>
   <div class="author">
     <%= form.label :author %>
     <%= form.text_field :author %>

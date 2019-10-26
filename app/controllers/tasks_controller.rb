@@ -4,7 +4,13 @@ class TasksController < ApplicationController
   def index
     #reverse_orderとする事で降順で並ぶ。
     # @tasks = Task.all.reverse_order
-    @tasks = Task.all.order(created_at: :desc)
+    if params[:end_period]
+      @tasks = Task.all.order(end_period: :desc)
+    elsif params[:priority]
+      @tasks = Task.all.order(priority: :desc)
+    else
+      @tasks = Task.all.order(created_at: :desc)
+    end
   end
 
   def new
