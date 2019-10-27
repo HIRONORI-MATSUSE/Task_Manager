@@ -31,19 +31,13 @@
   <div class="task_status">
     <%= form.label :task_status %>
     <%= form.enum_select :task_status %>
-    <%# <%= form.select :task_status, Task.statuses.map { |k, v| [t(tasks.status.#{k}), v] %> 
-
-    <%# # <%= select :task_status,:name,Task.task_statuses.keys.to_a %> 
-    <%# # <%= select :task_status,:name,Task.task_statuses.values.to_a %> 
+   
   </div>
   <div class="priority">
     <%= form.label :priority %>
     <%= form.enum_select :priority %>
 
-    <%# <%= f.select :priority, Task.statuses.map { |k, v| [t(articles.status.#{k}), v] %> 
 
-     <%# <%= select :priority,:name,Task.priorities.keys.to_a %> 
-     <%# <%= select :priority,:name,Task.priorities.values.to_a %>
   </div>
 <%# <h1>作者</h1> %>
   <div class="author">

@@ -5,11 +5,11 @@ class TasksController < ApplicationController
     #reverse_orderとする事で降順で並ぶ。
     # @tasks = Task.all.reverse_order
     if params[:end_period]
-      @tasks = Task.all.order(end_period: :desc)
+      @tasks = Task.all.order(end_period: :desc).page(params[:page]).per(5)
     elsif params[:priority]
-      @tasks = Task.all.order(priority: :desc)
+      @tasks = Task.all.order(priority: :desc).page(params[:page]).per(5)
     else
-      @tasks = Task.all.order(created_at: :desc)
+      @tasks = Task.all.order(created_at: :desc).page(params[:page]).per(5)
     end
   end
 
