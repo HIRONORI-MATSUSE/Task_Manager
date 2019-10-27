@@ -7,4 +7,11 @@ class Task < ApplicationRecord
   validates :author, presence: true
   enum task_status:{not_started: 0,started_in: 1,complete: 2}
   enum priority:{row: 0,medium: 1,high: 2}
+  def self.search(search)
+    if search
+       where(['name LIKE ?', "%#{search}%"])
+    else
+       all
+    end
+ end
 end
