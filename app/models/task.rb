@@ -5,4 +5,6 @@ class Task < ApplicationRecord
   validates :task_status, presence: true
   validates :priority, presence: true
   validates :author, presence: true
+  enum task_status:{not_started: 0,started_in: 1,complete: 2}
+  enum priority:{row: 0,medium: 1,high: 2}
 end

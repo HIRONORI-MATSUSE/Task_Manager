@@ -225,3 +225,13 @@ ja:
     Task list: タスク一覧
     New creation screen: 新規作成画面
     Task details screen: タスク詳細画面
+  enums:
+    task:
+      task_status:
+        not_started: 未着手
+        started_in: 着手中
+        complete: 完了
+      priority:
+        row: 低
+        medium: 中
+        high: 高

@@ -19,8 +19,8 @@ ActiveRecord::Schema.define(version: 2019_10_22_061618) do
     t.string "task_name", null: false
     t.string "task_details", null: false
     t.date "end_period", null: false
-    t.integer "task_status", null: false
-    t.integer "priority", null: false
+    t.integer "task_status", limit: 2, null: false
+    t.integer "priority", limit: 2, null: false
     t.string "author", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
