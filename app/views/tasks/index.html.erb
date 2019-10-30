@@ -1,22 +1,37 @@
 <h1><%= t('view.Task list') %></h1>
 
-<%= form_with(model: Task.new, local: true, method: :get) do |form| %>
-
   <p><%= notice %></p>
 
-  <%# <h1>タスク名・状態検索</h1> %>
-  <div class="task_name">
-    <%= form.text_field :search, class: "search-field", placeholder: "タイトルを入力して下さい。" %>
-    <%= form.submit '検索', name: nil, class: "btn btn-default" %>
-  <%# <h1>作成順</h1> %>
-  <%= link_to "作成順", tasks_path(cleate_at: "true") %>
-  <%# <h1>終了期限順</h1> %>
-  <%= link_to "終了期限順", tasks_path(end_period: "true") %>
-  <%# <h1>優先順位順</h1> %>
-  <%= link_to "優先順位", tasks_path(priority: "true") %>
+  <%= form_with(model: Task.new, local: true, method: :get) do |form| %>
 
-  <table>
-    <tr>
+
+
+
+
+
+
+
+  <%= form.label :search, 'search' %>
+  <%= form.search_field :search %>
+  <%= form.label :status, 'status' %>
+  <% if false %>
+  <%= form.select :task_status, { 未着手: 0, 着手中: 1, 完了: 2}, include_blank: true %>
+  <% end %>
+  <%= form.select :task_status, Task.task_statuses.keys.map{|k| [I18n.t("enums.task.task_status.#{k}"), k]}, include_blank: true %>
+  <%= form.submit "検索する", class:"btn btn-danger" %><br>
+  
+
+  <%# <h1>作成順</h1> %>
+  <%= link_to "作成順", tasks_path(cleate_at: "true"), class:"btn btn-info" %>
+  <%# <h1>終了期限順</h1> %>
+  <%= link_to "終了期限順", tasks_path(end_period: "true"), class:"btn btn-success" %>
+  <%# <h1>優先順位順</h1> %>
+  <%= link_to "優先順位順", tasks_path(priority: "true"), class:"btn btn-primary" %>
+
+
+
+  <table class="table table-striped">
+    <tr class="active">
       <th><%= t('view.task_name') %></th>
       <th><%= t('view.task_details') %></th>
       <th><%= t('view.end_period') %></th>
@@ -27,14 +42,14 @@
       <th><%= t('view.edit') %></th>
       <th><%= t('view.destroy') %></th>
     </tr>
-
+    
     <% @tasks.each do |task| %>
-      <tr>
+      <tr class="active">
         <td><%= task.task_name %></td>
         <td><%= task.task_details %></td>
         <td><%= task.end_period %></td>
-        <td><%= task.task_status_i18n %></td>
-        <td><%= task.priority_i18n %></td>
+        <td><%= I18n.t("enums.task.task_status.#{task.task_status}") %></td>
+        <td><%= I18n.t("enums.task.priority.#{task.priority}") %></td>
         <td><%= task.author %></td>
 
         <td><%= link_to t('view.show'), task_path(task.id)%></td>
@@ -42,7 +57,12 @@
         <td><%= link_to t('view.destroy'), task_path(task.id), method: :delete, data: { confirm: t('view.Do you really want to delete this?')} %></td>
       </tr>
     <% end %>
-<% end %>
   </table>
+<% end %>
 
-  <%= paginate(@tasks) %>
+
+
+
+
+
+  <%= paginate @tasks %>

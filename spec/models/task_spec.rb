@@ -42,5 +42,4 @@ RSpec.describe Task, type: :model do
     task = Task.new( task_name: "aaa", task_details: "aaa", end_period: "aaa", task_status: "aaa", priority: "aaa", author: "aaa")
       expect(task).to be_valid
   end
-
 end

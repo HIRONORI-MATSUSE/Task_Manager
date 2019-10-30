@@ -1,8 +1,28 @@
-<h1><%= t('view.Task details screen') %></h1>
-
-  <%= @task.task_name %>
-  <%= @task.task_details %>
-  <%= @task.end_period %>
-  <%= @task.task_status %>
-  <%= @task.priority %>
-  <%= @task.author %>
+<div class ="show_task">
+  <h1><%= t('view.Task details screen') %></h1>
+  <table class="table">
+    <div class="task_name">
+    <h3>タスク名</h3>
+      <%= @task.task_name %>
+  </div>
+  <div class="task_details">
+   <h3>タスク詳細</h3>
+      <%= @task.task_details %>  
+  </div>
+  <div class="end_period">
+    <h3>終了期限</h3>
+      <%= @task.end_period %>
+  </div>
+ <div class="task_status">
+   <h3>状態</h3>
+      <%= @task.task_status %>
+  </div>
+   <div class="priority">
+   <h3>優先順位</h3>
+      <%= @task.priority %>
+  </div>
+  <div class="author">
+   <h3>作者</h3>
+      <%= @task.author %>
+  </div>
+</div>

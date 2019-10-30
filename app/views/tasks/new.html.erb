@@ -12,42 +12,34 @@
   <% end %>
 
 <h1><%= t('view.New creation screen') %></h1>
-<%# <h1>タスク名</h1> %>
-  <div class="task_name">
-    <%= form.label :task_name %>
-    <%= form.text_field :task_name %>
-  </div>
-<%# <h1>タスク詳細</h1> %>
-  <div class="task_details">
-    <%= form.label :task_details %>
-    <%= form.text_field :task_details %>
-  </div>
-<%# <h1>終了期限</h1> %>
-  <div class="end_period">
-    <%= form.label :end_period %>
-    <%= form.date_field :end_period %>
-  </div>
-<%# <h1>状態（未着手か着手中か完了)</h1> %>
-  <div class="task_status">
-    <%= form.label :task_status %>
-    <%= form.enum_select :task_status %>
-   
-  </div>
-  <div class="priority">
-    <%= form.label :priority %>
-    <%= form.enum_select :priority %>
 
+    <div class="form-group">
+      <%= form.label :task_name %>
+      <%= form.text_field :task_name, class:"form-control" %>
+    </div>
+    <div class="form-group">
+      <%= form.label :task_details %>
+      <%= form.text_field :task_details, class:"form-control" %>
+    </div>
+    <div class="form-group">
+      <%= form.label :end_period %>
+      <%= form.date_field :end_period, class:"form-control" %>
+    </div>
+    <div class="down_list">
+      <%= form.label :task_status %><br>
+      <%= form.select :task_status, Task.task_statuses.keys.map{|k| [I18n.t("enums.task.task_status.#{k}"), k]}, include_blank: true %>
+      <%# <%= form.select(:task_status, [['未着手', "未着手"], ['着手中': "着手中"], ['完了': "完了"]]) %>
+    </div>
+    <div class="down_list">
+      <%= form.label :priority %><br>
+      <%= form.select :priority, Task.priorities.keys.map{|k| [I18n.t("enums.task.priority.#{k}"), k]}, include_blank: true %>
+      <%# <%= form.select(:priority, [['低', "低"], ['中': "中"], ['高': "高"]]) %> 
+    </div>
+    <div class="form-group">
+      <%= form.label :author %>
+      <%= form.text_field :author, class:"form-control" %>
+  　</div>
+    <%= form.submit(class: "btn btn-primary") %>
+  <% end %>
 
-  </div>
-<%# <h1>作者</h1> %>
-  <div class="author">
-    <%= form.label :author %>
-    <%= form.text_field :author %>
-  </div>
-
-
-  <%= form.submit %>
-<% end %>
-
-
-<%= link_to t('view.To list screen'),tasks_path %>
+<%= link_to t('view.To list screen'),tasks_path, class:"btn btn-primary" %>
