@@ -39,7 +39,7 @@ RSpec.describe Task, type: :model do
 
   it "内容がすべて記載されていればバリデーションが通る" do
     # ここに内容を記載する
-    task = Task.new( task_name: "aaa", task_details: "aaa", end_period: "aaa", task_status: "aaa", priority: "aaa", author: "aaa")
+    task = Task.new( task_name: "test_task_03", task_details: "hello_end_world", end_period: "2019-10-31", task_status: "complete", priority: "high", author: "alice")
       expect(task).to be_valid
   end
 end
