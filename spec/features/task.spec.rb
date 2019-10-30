@@ -13,8 +13,8 @@ RSpec.feature "タスク管理機能", type: :feature do
   # scenario（itのalias）の中に、確認したい各項目のテストの処理を書きます。
   scenario "タスク一覧のテスト" do
     visit tasks_path
-    expect(page).to have_content 'testtesttest' 
-    expect(page).to have_content 'samplesample'
+    expect(page).to have_content 'hello_world' 
+    expect(page).to have_content 'hello_hello'
   end
 
   scenario "タスク作成のテスト" do
@@ -24,12 +24,14 @@ RSpec.feature "タスク管理機能", type: :feature do
     # タスクのタイトルと内容をそれぞれfill_in（入力）する
     #2.ここに「タスク名」というラベル名の入力欄に内容をfill_in（入力）する処理を書く
     #fillはidを見ている
-    fill_in 'task_task_name', with: 'test_task_xxx'
-    fill_in 'task_task_details', with: 'test_task_xxx'
-    fill_in 'task_end_period', with: 'test_task_xxx'
-    fill_in 'task_task_status', with: 'test_task_xxx'
-    fill_in 'task_priority', with: 'test_task_xxx'
-    fill_in 'task_author', with: 'test_task_xxx'
+    fill_in 'task_task_name', with: 'test_task_01'
+    fill_in 'task_task_details', with: 'hello_world'
+    fill_in 'task_end_period', with: '2019-10-29'
+    # select 'not_started', from: 'task_status'
+    find("option[value='not_started']").select_option
+    # select 'low', from: 'priority'
+    find("option[value='low']").select_option
+    fill_in 'task_author', with: 'jon'
     # 「登録する」というvalue（表記文字）のあるボタンをclick_onする（クリックする）
     # 4.「登録する」というvalue（表記文字）のあるボタンをclick_onする（クリックする）する処理を書く
     #save save_and_open_page
@@ -67,6 +69,67 @@ RSpec.feature "タスク管理機能", type: :feature do
     tds = page.all('tr td')
 
     expect(tds[0]).to have_content 'test_task_03'
+    # all('table tr')[1]. have_content 'test_task_03'
+    #toは〜であること。eqは期待値と実際の値が等しいこと。beは等号、不等号を使用して値の大小を検証する時に使う。
+  end
+
+  scenario "終了期限順に並んでいるかのテスト" do
+    # ここにテスト内容を記載する
+    visit tasks_path
+    # fill_in 'task_task_name', with: 'test_task_01'
+    click_on '終了期限順'
+    eps = page.all('tr td')
+
+    expect(eps[0]).to have_content 'test_task_03'
+    # all('table tr')[1]. have_content 'test_task_03'
+    #toは〜であること。eqは期待値と実際の値が等しいこと。beは等号、不等号を使用して値の大小を検証する時に使う。
+  end
+
+  scenario "優先順位順に並んでいるかのテスト" do
+    # ここにテスト内容を記載する
+    visit tasks_path
+
+    click_on '優先順位順'
+    
+    # fill_in 'task_task_name', with: 'test_task_01'
+    # click_on '登録する'
+    ps = page.all('tr td')
+
+    expect(ps[0]).to have_content 'test_task_03'
+    # all('table tr')[1]. have_content 'test_task_03'
+    #toは〜であること。eqは期待値と実際の値が等しいこと。beは等号、不等号を使用して値の大小を検証する時に使う。
+  end
+  scenario "searchで検索すると検索したものが並ぶかのテスト" do
+
+   
+    # ここにテスト内容を記載する
+    visit tasks_path
+
+
+    fill_in 'search', with: 'test_task_03'
+    click_on '検索する'
+    
+    # fill_in 'task_task_name', with: 'test_task_01'
+    # click_on '登録する'
+    ps = page.all('tr td')
+
+    expect(ps[0]).to have_content 'test_task_03'
+    # all('table tr')[1]. have_content 'test_task_03'
+    #toは〜であること。eqは期待値と実際の値が等しいこと。beは等号、不等号を使用して値の大小を検証する時に使う。
+  end
+
+  scenario "statusのプルダウンメニューを選択したものが並ぶかのテスト" do
+    # ここにテスト内容を記載する
+    visit tasks_path
+
+    find("option[value='complete']").select_option
+    click_on '検索する'
+    
+    # fill_in 'task_task_name', with: 'test_task_01'
+    # click_on '登録する'
+    ps = page.all('tr td')
+
+    expect(ps[0]).to have_content 'test_task_03'
     # all('table tr')[1]. have_content 'test_task_03'
     #toは〜であること。eqは期待値と実際の値が等しいこと。beは等号、不等号を使用して値の大小を検証する時に使う。
   end

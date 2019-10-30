@@ -39,8 +39,25 @@ RSpec.describe Task, type: :model do
 
   it "内容がすべて記載されていればバリデーションが通る" do
     # ここに内容を記載する
-    task = Task.new( task_name: "aaa", task_details: "aaa", end_period: "aaa", task_status: "aaa", priority: "aaa", author: "aaa")
+    task = Task.new( task_name: "test_task_03", task_details: "hello_end_world", end_period: "2019-10-31", task_status: "complete", priority: "high", author: "alice")
       expect(task).to be_valid
   end
 
+  
+#振る舞いごとに処理が実行される
+  before do
+    @task = FactoryBot.create(:task)
+  end
+
+  #describeは対象(〜について) を分類
+  #contextはその状態(〜な場合) を分類
+
+  context "modelに記載したscopeによる絞りこみを確かめる" do
+    # 検索文字列に一致するメモを返すこと
+    it "modelに記載したscopeによる絞りこみを確かめる" do
+      #Taskモデルのtask_nameを検索したとき@taskが見つかる
+      expect(Task.task_name_search("test_task_01")).to include(@task)
+    end
+  end
+  
 end

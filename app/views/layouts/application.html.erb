@@ -10,8 +10,19 @@
   </head>
 
   <body>
-    <%= link_to '一覧画面へ',tasks_path %>
-    <%= link_to '新規画面へ', new_task_path %>
-    <%= yield %>
+    <%= link_to '一覧画面へ',tasks_path, class:"btn btn-info" %>
+    <%= link_to '新規画面へ', new_task_path, class:"btn btn-info"%>
+      <div class="center-block">
+      <div id="wrapper">
+    <main>
+       <%= yield %>
+    </main>
+      </div>
+    <footer>
+      <div>
+        <li>Everyleaf_Mannyou</li>
+        <li>© 2019 Copyright MATSUSE</li>
+      </div>
+    </footer>
   </body>
 </html>
