@@ -42,3 +42,5 @@
 
 
 <%= link_to t('view.To list screen'),tasks_path %>
+<div class="new_task"><%= link_to "タスク作成画面", new_task_path(current_user.id) %></div>
+<div class="my_task"><%= link_to "タスク一覧", tasks_path(current_user.id) %></div>

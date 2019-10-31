@@ -8,5 +8,5 @@
 User.create!(
   name: 'test@gmail.com',
   email: 'test@gmail.com',
-  password_digest: 'test@gmail.com'
+  password: '123456'
 )
