@@ -1,6 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe Task, type: :model do
+  # before do
+  #   @task = FactoryBot.create(:task)
+  # end
 
   it "task_nameが空ならバリデーションが通らない" do
     task = Task.new(task_name: '')
@@ -39,21 +42,29 @@ RSpec.describe Task, type: :model do
 
   it "内容がすべて記載されていればバリデーションが通る" do
     # ここに内容を記載する
-    task = Task.new( task_name: "test_task_03", task_details: "hello_end_world", end_period: "2019-10-31", task_status: "complete", priority: "high", author: "alice")
+
+      user = FactoryBot.create(:first_user)
+
+    task = Task.new( task_name: "test_task_03", task_details: "hello_end_world", end_period: "2019-10-31", task_status: "complete", priority: "high", author: "alice",user_id: "1")
       expect(task).to be_valid
   end
-
   #ここ
 #振る舞いごとに処理が実行される
   #describeは対象(〜について) を分類
   #contextはその状態(〜な場合) を分類
 #1:宣言する
   context "modelに記載したscopeによる絞りこみを確かめる" do
+
+    before do
+      user = FactoryBot.create(:first_user)
+      @task = FactoryBot.create(:task)
+    end
+
+
+    # user = FactoryBot.create(:first_user)
+    # @task = Task.new( task_name: "test_task_03", task_details: "hello_end_world", end_period: "2019-10-31", task_status: "complete", priority: "high", author: "alice",user_id: "1")
 #検索フォームで作る.(factorybotで作ったtask_nameを入れる)
 #factorybotの（：task）の名前を変数@taskにいれる（代入）。
-  before do
-    @task = FactoryBot.create(:task)
-  end
     # 検索文字列に一致するメモを返すこと
     it "modelに記載したscopeによる絞りこみを確かめる" do
       #Taskモデルのtask_nameを検索したとき@taskが見つかる

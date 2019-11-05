@@ -12,7 +12,7 @@
   <% end %>
   <%= form.select :task_status, Task.task_statuses.keys.map{|k| [I18n.t("enums.task.task_status.#{k}"), k]}, include_blank: true %>
   <%= form.submit "検索する", class:"btn btn-danger" %><br>
-  
+
 
   <%# <h1>作成順</h1> %>
   <%= link_to "作成順", tasks_path(cleate_at: "true"), class:"btn btn-info" %>
@@ -35,7 +35,7 @@
       <th><%= t('view.edit') %></th>
       <th><%= t('view.destroy') %></th>
     </tr>
-    
+
     <% @tasks.each do |task| %>
       <tr class="active">
         <td><%= task.task_name %></td>
@@ -53,9 +53,6 @@
   </table>
 <% end %>
 
-
-
-
-
-
   <%= paginate @tasks %>
+  <div class="new_task"><%= link_to "タスク作成画面", new_task_path(current_user.id) %></div>
+<div class="my_task"><%= link_to "タスク一覧", tasks_path(current_user.id) %></div>

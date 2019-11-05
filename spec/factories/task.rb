@@ -5,11 +5,12 @@ FactoryBot.define do
   # （実際に存在するクラス名と一致するテストデータの名前をつければ、そのクラスのテストデータを自動で作成します）
   factory :task do
     task_name { 'test_task_01' }
-    task_details { 'hello_world' } 
+    task_details { 'hello_world' }
     end_period { '2019-10-29' }
     task_status { 'not_started' }
     priority { 'low' }
     author { 'jon' }
+    user_id {1}
   end
 
   # 作成するテストデータの名前を「second_task」とします
@@ -21,6 +22,7 @@ FactoryBot.define do
     task_status { 'started_in' }
     priority { 'medium' }
     author { 'sum' }
+    user_id {1}
   end
 
   factory :third_task, class: Task do
@@ -30,5 +32,6 @@ FactoryBot.define do
     task_status { 'complete' }
     priority { 'high' }
     author { 'alice' }
+    user_id {1}
   end
 end

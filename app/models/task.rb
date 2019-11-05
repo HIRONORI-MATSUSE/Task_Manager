@@ -1,4 +1,5 @@
 class Task < ApplicationRecord
+  belongs_to :user
   validates :task_name, presence: true, length:{ maximum:100}
   validates :task_details, presence: true, length:{ maximum:100}
   validates :end_period, presence: true
@@ -7,6 +8,7 @@ class Task < ApplicationRecord
   validates :author, presence: true
   enum task_status: { not_started: 0,started_in: 1, complete: 2}
   enum priority: { low: 0, medium: 1, high: 2}
+  
 
 scope :task_name_search, -> (task_name) {
     next if task_name.blank?

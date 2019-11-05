@@ -5,19 +5,34 @@ require 'rails_helper'
 RSpec.feature "タスク管理機能", type: :feature do
 
   background do
+
+
+    FactoryBot.create(:first_user)
+    FactoryBot.create(:second_user)
+    FactoryBot.create(:third_user)
     FactoryBot.create(:task)
     FactoryBot.create(:second_task)
     FactoryBot.create(:third_task)
   end
-    
+
   # scenario（itのalias）の中に、確認したい各項目のテストの処理を書きます。
   scenario "タスク一覧のテスト" do
+    visit new_session_path
+    fill_in 'Email', with: 'jon@gmail.com'
+    fill_in 'Password', with: '123456'
+    click_on 'Log in'
+
     visit tasks_path
-    expect(page).to have_content 'hello_world' 
+    expect(page).to have_content 'hello_world'
     expect(page).to have_content 'hello_hello'
   end
 
   scenario "タスク作成のテスト" do
+    visit new_session_path
+    fill_in 'Email', with: 'jon@gmail.com'
+    fill_in 'Password', with: '123456'
+    click_on 'Log in'
+
     visit new_task_path
     #新規画面へ飛ぶ
     #「タスク名」というラベル名の入力欄と、「タスク詳細」というラベル名の入力欄に
@@ -43,6 +58,10 @@ RSpec.feature "タスク管理機能", type: :feature do
   end
 
   scenario "タスク詳細のテスト" do
+    visit new_session_path
+    fill_in 'Email', with: 'jon@gmail.com'
+    fill_in 'Password', with: '123456'
+    click_on 'Log in'
     #直接詳細から見る場合
     # task = Task.create!(task_name: 'test_task_01', task_details: 'testtesttest')
     # visit task_path(task.id)
@@ -57,13 +76,17 @@ RSpec.feature "タスク管理機能", type: :feature do
     expect(page).to have_link '詳細'
     # puts  "松瀬#{expect(page)}"
     # expect(page).to have_content task.all
-    
+
   end
 
   scenario "タスクが作成日時の降順に並んでいるかのテスト" do
+    visit new_session_path
+    fill_in 'Email', with: 'jon@gmail.com'
+    fill_in 'Password', with: '123456'
+    click_on 'Log in'
     # ここにテスト内容を記載する
     visit tasks_path
-    
+
     # fill_in 'task_task_name', with: 'test_task_01'
     # click_on '登録する'
     tds = page.all('tr td')
@@ -74,6 +97,10 @@ RSpec.feature "タスク管理機能", type: :feature do
   end
 
   scenario "終了期限順に並んでいるかのテスト" do
+    visit new_session_path
+    fill_in 'Email', with: 'jon@gmail.com'
+    fill_in 'Password', with: '123456'
+    click_on 'Log in'
     # ここにテスト内容を記載する
     visit tasks_path
     # fill_in 'task_task_name', with: 'test_task_01'
@@ -86,11 +113,15 @@ RSpec.feature "タスク管理機能", type: :feature do
   end
 
   scenario "優先順位順に並んでいるかのテスト" do
+    visit new_session_path
+    fill_in 'Email', with: 'jon@gmail.com'
+    fill_in 'Password', with: '123456'
+    click_on 'Log in'
     # ここにテスト内容を記載する
     visit tasks_path
 
     click_on '優先順位順'
-    
+
     # fill_in 'task_task_name', with: 'test_task_01'
     # click_on '登録する'
     ps = page.all('tr td')
@@ -100,15 +131,17 @@ RSpec.feature "タスク管理機能", type: :feature do
     #toは〜であること。eqは期待値と実際の値が等しいこと。beは等号、不等号を使用して値の大小を検証する時に使う。
   end
   scenario "searchで検索すると検索したものが並ぶかのテスト" do
-
-   
+    visit new_session_path
+    fill_in 'Email', with: 'jon@gmail.com'
+    fill_in 'Password', with: '123456'
+    click_on 'Log in'
     # ここにテスト内容を記載する
     visit tasks_path
 
 
     fill_in 'search', with: 'test_task_03'
     click_on '検索する'
-    
+
     # fill_in 'task_task_name', with: 'test_task_01'
     # click_on '登録する'
     ps = page.all('tr td')
@@ -120,11 +153,15 @@ RSpec.feature "タスク管理機能", type: :feature do
 
   scenario "statusのプルダウンメニューを選択したものが並ぶかのテスト" do
     # ここにテスト内容を記載する
+    visit new_session_path
+    fill_in 'Email', with: 'jon@gmail.com'
+    fill_in 'Password', with: '123456'
+    click_on 'Log in'
     visit tasks_path
 
     find("option[value='complete']").select_option
     click_on '検索する'
-    
+
     # fill_in 'task_task_name', with: 'test_task_01'
     # click_on '登録する'
     ps = page.all('tr td')
@@ -132,5 +169,11 @@ RSpec.feature "タスク管理機能", type: :feature do
     expect(ps[0]).to have_content 'test_task_03'
     # all('table tr')[1]. have_content 'test_task_03'
     #toは〜であること。eqは期待値と実際の値が等しいこと。beは等号、不等号を使用して値の大小を検証する時に使う。
+
+
+
+
+    # bin/rspec spec/features/task.spec.rb
   end
+
 end

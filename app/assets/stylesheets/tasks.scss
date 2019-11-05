@@ -108,7 +108,7 @@ header{
       }
     }
 
-    .admin_login{
+    .admin_page{
       margin-right: 30px;
       // text-align: right;
       a{
@@ -131,6 +131,12 @@ header{
   flex-direction: column;
   background-color: #fff;
   align-items: center;
+}
+
+.active{
+  th{
+    text-align: center;
+  }
 }
 
 .index_picture{
