@@ -4,13 +4,6 @@
 
   <%= form_with(model: Task.new, local: true, method: :get) do |form| %>
 
-
-
-
-
-
-
-
   <%= form.label :search, 'search' %>
   <%= form.search_field :search %>
   <%= form.label :status, 'status' %>
@@ -19,7 +12,7 @@
   <% end %>
   <%= form.select :task_status, Task.task_statuses.keys.map{|k| [I18n.t("enums.task.task_status.#{k}"), k]}, include_blank: true %>
   <%= form.submit "検索する", class:"btn btn-danger" %><br>
-  
+
 
   <%# <h1>作成順</h1> %>
   <%= link_to "作成順", tasks_path(cleate_at: "true"), class:"btn btn-info" %>
@@ -37,12 +30,11 @@
       <th><%= t('view.end_period') %></th>
       <th><%= t('view.task_status') %></th>
       <th><%= t('view.priority') %></th>
-      <th><%= t('view.author') %></th>
       <th><%= t('view.show') %></th>
       <th><%= t('view.edit') %></th>
       <th><%= t('view.destroy') %></th>
     </tr>
-    
+
     <% @tasks.each do |task| %>
       <tr class="active">
         <td><%= task.task_name %></td>
@@ -50,7 +42,6 @@
         <td><%= task.end_period %></td>
         <td><%= I18n.t("enums.task.task_status.#{task.task_status}") %></td>
         <td><%= I18n.t("enums.task.priority.#{task.priority}") %></td>
-        <td><%= task.author %></td>
 
         <td><%= link_to t('view.show'), task_path(task.id)%></td>
         <td><%= link_to t('view.edit'), edit_task_path(task.id), data: { confirm: t('view.Do you really want to edit it?')} %></td>
@@ -60,9 +51,6 @@
   </table>
 <% end %>
 
-
-
-
-
-
   <%= paginate @tasks %>
+  <div class="new_task"><%= link_to "タスク作成画面", new_task_path %></div>
+<div class="my_task"><%= link_to "タスク一覧", tasks_path %></div>

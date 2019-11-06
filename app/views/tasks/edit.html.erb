@@ -33,12 +33,10 @@
     <%= form.label :priority %>
     <%= form.select :priority, { 低: "row", 中: "medium", 高: "high"}%>
   </div>
-  <div class="author">
-    <%= form.label :author %>
-    <%= form.text_field :author, class:"form-control" %>
-  </div>
   <%= form.submit %>
 <% end %>
 
 
 <%= link_to t('view.To list screen'),tasks_path %>
+<div class="new_task"><%= link_to "タスク作成画面", new_task_path %></div>
+<div class="my_task"><%= link_to "タスク一覧", tasks_path %></div>

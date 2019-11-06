@@ -17,7 +17,7 @@ ja:
     - 金
     - 土
     abbr_month_names:
-    - 
+    -
     - 1月
     - 2月
     - 3月
@@ -43,7 +43,7 @@ ja:
       long: "%Y年%m月%d日(%a)"
       short: "%m/%d"
     month_names:
-    - 
+    -
     - 1月
     - 2月
     - 3月
@@ -220,14 +220,14 @@ ja:
     destroy: 削除
     To list screen: 一覽画面へ
     Editing screen: 編集画面
-    Do you really want to edit it?: 本当に編集しますか?      
-    Do you really want to delete this?: 本当に削除しますか?    
+    Do you really want to edit it?: 本当に編集しますか?
+    Do you really want to delete this?: 本当に削除しますか?
     Task list: タスク一覧
     New creation screen: 新規作成画面
     Task details screen: タスク詳細画面
   enums:
     task:
-      task_status:  
+      task_status:
         not_started: 未着手
         started_in: 着手中
         complete: 完了

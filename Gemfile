@@ -15,6 +15,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'kaminari'
 gem 'ransack'
 gem 'rails-i18n', '~> 5.1'
+gem 'bcrypt', '3.1.11'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
@@ -40,9 +41,9 @@ group :test do
   gem 'database_cleaner'
   gem 'webdrivers'
   gem 'launchy'
+  gem 'database_cleaner'
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'enum_help'
-

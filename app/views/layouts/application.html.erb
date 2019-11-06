@@ -10,10 +10,28 @@
   </head>
 
   <body>
-    <%= link_to '一覧画面へ',tasks_path, class:"btn btn-info" %>
-    <%= link_to '新規画面へ', new_task_path, class:"btn btn-info"%>
-      <div class="center-block">
-      <div id="wrapper">
+    <header>
+      <div class="app_name"><%= link_to "Everyleaf_Mannyou", tasks_path %></div>
+      <div class="header_manu">
+        <% if logged_in? %>
+        <div class="my_page"><%= link_to "マイページ", user_path(current_user.id) %></div>
+        <div class="new_task"><%= link_to "タスク作成画面", new_task_path(current_user.id) %></div>
+        <div class="my_task"><%= link_to "タスク一覧", tasks_path(current_user.id) %></div>
+          <% if current_user.admin == true %>
+            <div class="admin_page"><%= link_to "管理者画面", admin_users_path %></div>
+            <div class="sign_up"><%= link_to "管理者用新規登録", new_admin_user_path %></div>
+          <% end %>
+        <div class="logout"><%= link_to "ログアウト", session_path(current_user.id), method: :delete %></div>
+        <div class="crrent_user">ユーザー名：<%= current_user.name %></div>
+        <% else %>
+        <div class="sign_up"><%= link_to "新規登録", new_user_path %></div>
+        <div class="login"><%= link_to "ログイン", new_session_path %></div>
+        <% end %>
+      </div>
+    </header>
+    <% flash.each do |key,value| %>
+    <%= content_tag(:div,value,class:"#{key}")%>
+    <% end %>
     <main>
        <%= yield %>
     </main>
