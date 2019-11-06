@@ -1,5 +1,6 @@
 class TasksController < ApplicationController
   before_action :set_tasks, only:[:show, :edit, :update, :destroy]
+  before_action :authenticate_user
 
   def index
     #reverse_orderとする事で降順で並ぶ。

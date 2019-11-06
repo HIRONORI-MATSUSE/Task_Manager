@@ -1,5 +1,5 @@
 <div class="main-container ">
-<h2>ユーザ編集画面</h2>
+<h1>管理者用新規登録</h1>
 
 <% if @user.errors.any? %>
   <div id="error_explanation">
@@ -12,7 +12,7 @@
   </div>
 <% end %>
 
-<%= form_with(model: @user, local: true, url: "/admin/users/#{@user.id}") do |f| %>
+<%= form_with(model: @user, local: true) do |f| %>
   <%= f.label :name %>
   <%= f.text_field :name %>
 
@@ -25,10 +25,8 @@
   <%= f.label :password_confirmation %>
   <%= f.password_field :password_confirmation %>
 
-  <%# <%= f.label :"管理者権限" %> %>
-  <%# <%= f.check_box :checkbox, id: :sample_checkbox,:as => :boolean,checked:true%> %>
   <%= f.label :管理者権限 %>
-  <%= f.check_box :admin, checked:true %>
+  <%= f.check_box :admin, :as => :boolean, checked:true %>
 
   <%= f.submit "Create my account" %>
 <% end %>
