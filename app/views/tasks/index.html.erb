@@ -30,7 +30,6 @@
       <th><%= t('view.end_period') %></th>
       <th><%= t('view.task_status') %></th>
       <th><%= t('view.priority') %></th>
-      <th><%= t('view.author') %></th>
       <th><%= t('view.show') %></th>
       <th><%= t('view.edit') %></th>
       <th><%= t('view.destroy') %></th>
@@ -43,7 +42,6 @@
         <td><%= task.end_period %></td>
         <td><%= I18n.t("enums.task.task_status.#{task.task_status}") %></td>
         <td><%= I18n.t("enums.task.priority.#{task.priority}") %></td>
-        <td><%= task.author %></td>
 
         <td><%= link_to t('view.show'), task_path(task.id)%></td>
         <td><%= link_to t('view.edit'), edit_task_path(task.id), data: { confirm: t('view.Do you really want to edit it?')} %></td>

@@ -7,7 +7,7 @@
   </div>
   <div class="task_details">
    <h3>タスク詳細</h3>
-      <%= @task.task_details %>  
+      <%= @task.task_details %>
   </div>
   <div class="end_period">
     <h3>終了期限</h3>
@@ -22,9 +22,6 @@
       <%= @task.priority %>
   </div>
   <div class="author">
-   <h3>作者</h3>
-      <%= @task.author %>
-  </div>
 </div>
 <div class="new_task"><%= link_to "タスク作成画面", new_task_path(current_user.id) %></div>
 <div class="my_task"><%= link_to "タスク一覧", tasks_path(current_user.id) %></div>

@@ -44,7 +44,6 @@ class TasksController < ApplicationController
 
   def create
     @task = current_user.tasks.new(task_params)
-    binding.pry
     if @task.save
     redirect_to tasks_path, notice: '作成しました'
     else

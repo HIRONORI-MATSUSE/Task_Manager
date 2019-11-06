@@ -33,14 +33,9 @@
     <div class="down_list">
       <%= form.label :priority %><br>
       <%= form.select :priority, Task.priorities.keys.map{|k| [I18n.t("enums.task.priority.#{k}"), k]}, include_blank: true %>
-      <%# <%= form.select(:priority, [['低', "低"], ['中': "中"], ['高': "高"]]) %> 
+      <%# <%= form.select(:priority, [['低', "低"], ['中': "中"], ['高': "高"]]) %>
     </div>
-    <div class="form-group">
-      <%= form.label :author %>
-      <%= form.text_field :author, class:"form-control" %>
-  　</div>
     <%= form.submit(class: "btn btn-primary") %>
   <% end %>
 
 <%= link_to t('view.To list screen'),tasks_path, class:"btn btn-primary" %>
-
