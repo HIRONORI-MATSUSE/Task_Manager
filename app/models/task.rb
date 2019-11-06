@@ -5,10 +5,9 @@ class Task < ApplicationRecord
   validates :end_period, presence: true
   validates :task_status, presence: true
   validates :priority, presence: true
-  validates :author, presence: true
   enum task_status: { not_started: 0,started_in: 1, complete: 2}
   enum priority: { low: 0, medium: 1, high: 2}
-  
+
 
 scope :task_name_search, -> (task_name) {
     next if task_name.blank?
@@ -18,5 +17,5 @@ scope :task_status, -> (task_status) {
     next if task_status.blank?
     where(task_status: task_status)
 }
- 
+
 end
