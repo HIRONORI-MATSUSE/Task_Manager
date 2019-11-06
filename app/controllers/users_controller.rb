@@ -1,11 +1,8 @@
 class UsersController < ApplicationController
 
   before_action :set_user, only: [:show]
-  before_action :redirect_session, only:[:show]
-  before_action :login_new, only:[:new]
-
-
-
+  before_action :redirect_session, only: [:show]
+  before_action :login_new, only: [:new]
 
   def new
     @user = User.new
@@ -49,7 +46,7 @@ class UsersController < ApplicationController
     end
   end
 
-#ログイン中
+#ログイン中のユーザーが会員（管理者）でなければマイページへ飛ぶ
   def login_new
     if logged_in? && !current_user.admin?
       redirect_to user_path(current_user)
