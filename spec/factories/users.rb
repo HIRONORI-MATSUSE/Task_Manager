@@ -20,6 +20,7 @@ FactoryBot.define do
     admin { false }
     # password_cofirmation { '123456' }
   end
+  
 
   factory :third_user, class: User do
     name { 'alice' }
