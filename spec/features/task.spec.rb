@@ -4,14 +4,22 @@ require 'rails_helper'
 # このRSpec.featureの右側に、「タスク管理機能」のように、テスト項目の名称を書きます（do ~ endでグループ化されています）
 RSpec.feature "タスク管理機能", type: :feature do
 
-  background do
-    FactoryBot.create(:first_user)
-    FactoryBot.create(:second_user)
-    FactoryBot.create(:third_user)
-    FactoryBot.create(:task)
-    FactoryBot.create(:second_task)
-    FactoryBot.create(:third_task)
-  end
+  # background do
+  #   FactoryBot.create(:first_user)
+  #   FactoryBot.create(:second_user)
+  #   FactoryBot.create(:third_user)
+  #   FactoryBot.create(:task)
+  # end
+
+   before(:all) do
+      FactoryBot.create(:first_user)
+      FactoryBot.create(:first_label)
+      @task = FactoryBot.create(:task)
+      # FactoryBot.create(:label)
+      # @task = @task.update(label_ids: ["0"])
+      # @task = @task.label_ids(label_ids: 0 )
+      # @label = FactoryBot.create(:first_label)
+    end
 
   # scenario（itのalias）の中に、確認したい各項目のテストの処理を書きます。
   scenario "タスク一覧のテスト" do
@@ -21,8 +29,8 @@ RSpec.feature "タスク管理機能", type: :feature do
     click_on 'Log in'
 
     visit tasks_path
-    expect(page).to have_content 'hello_world'
-    expect(page).to have_content 'hello_hello'
+    tds = page.all('tr td')
+    expect(tds[1]).to have_content 'hello_world'
   end
 
   scenario "タスクとラベル作成のテスト" do
@@ -95,8 +103,7 @@ RSpec.feature "タスク管理機能", type: :feature do
     # fill_in 'task_task_name', with: 'test_task_01'
     # click_on '登録する'
     tds = page.all('tr td')
-
-    expect(tds[0]).to have_content 'test_task_03'
+    expect(tds[0]).to have_content 'test_task_01'
     # all('table tr')[1]. have_content 'test_task_03'
     #toは〜であること。eqは期待値と実際の値が等しいこと。beは等号、不等号を使用して値の大小を検証する時に使う。
   end
@@ -111,8 +118,8 @@ RSpec.feature "タスク管理機能", type: :feature do
     # fill_in 'task_task_name', with: 'test_task_01'
     click_on '終了期限順'
     eps = page.all('tr td')
-
-    expect(eps[0]).to have_content 'test_task_03'
+  
+    expect(eps[0]).to have_content 'test_task_01'
     # all('table tr')[1]. have_content 'test_task_03'
     #toは〜であること。eqは期待値と実際の値が等しいこと。beは等号、不等号を使用して値の大小を検証する時に使う。
   end
@@ -124,14 +131,13 @@ RSpec.feature "タスク管理機能", type: :feature do
     click_on 'Log in'
     # ここにテスト内容を記載する
     visit tasks_path
-
     click_on '優先順位順'
 
     # fill_in 'task_task_name', with: 'test_task_01'
     # click_on '登録する'
     ps = page.all('tr td')
 
-    expect(ps[0]).to have_content 'test_task_03'
+    expect(ps[0]).to have_content 'test_task_01'
     # all('table tr')[1]. have_content 'test_task_03'
     #toは〜であること。eqは期待値と実際の値が等しいこと。beは等号、不等号を使用して値の大小を検証する時に使う。
   end
@@ -142,15 +148,14 @@ RSpec.feature "タスク管理機能", type: :feature do
     click_on 'Log in'
     # ここにテスト内容を記載する
     visit tasks_path
-
-    fill_in 'task_name_search', with: 'test_task_03'
+    fill_in 'task_name_search', with: 'test_task_01'
     click_on '検索する'
 
     # fill_in 'task_task_name', with: 'test_task_01'
     # click_on '登録する'
     ps = page.all('tr td')
 
-    expect(ps[0]).to have_content 'test_task_03'
+    expect(ps[0]).to have_content 'test_task_01'
     # all('table tr')[1]. have_content 'test_task_03'
     #toは〜であること。eqは期待値と実際の値が等しいこと。beは等号、不等号を使用して値の大小を検証する時に使う。
   end
@@ -162,19 +167,20 @@ RSpec.feature "タスク管理機能", type: :feature do
     fill_in 'Password', with: '123456'
     click_on 'Log in'
     visit tasks_path
-
-    find("option[value='complete']").select_option
+    find("option[value='not_started']").select_option
+    # find("option[value='row']").select_option
     click_on '検索する'
-
+   
     # fill_in 'task_task_name', with: 'test_task_01'
     # click_on '登録する'
     ps = page.all('tr td')
-
-    expect(ps[0]).to have_content 'test_task_03'
+    expect(ps[0]).to have_content 'test_task_01'
     # all('table tr')[1]. have_content 'test_task_03'
     #toは〜であること。eqは期待値と実際の値が等しいこと。beは等号、不等号を使用して値の大小を検証する時に使う。
     # bin/rspec spec/features/task.spec.rb
   end
+
+
 
   scenario "ラベル名で検索すると検索したものが並ぶかのテスト" do
     visit new_session_path
@@ -195,20 +201,20 @@ RSpec.feature "タスク管理機能", type: :feature do
     fill_in 'task_end_period', with: '2019-10-29'
     find("option[value='not_started']").select_option
     find("option[value='low']").select_option
-    check 'task_label_ids_2'
+    check 'task_label_ids_1'
     
     click_on '登録する'
 
 
     visit tasks_path
-    fill_in 'task_label_search', with: 'home'
+    fill_in 'task_label_search', with: 'school'
     click_on '検索する'
 
     # fill_in 'task_task_name', with: 'test_task_01'
     # click_on '登録する'
     ps = page.all('tr td')
 
-    expect(ps[2]).to have_content 'home'
+    expect(ps[2]).to have_content 'school'
     # all('table tr')[1]. have_content 'test_task_03'
     #toは〜であること。eqは期待値と実際の値が等しいこと。beは等号、不等号を使用して値の大小を検証する時に使う。
   end
