@@ -1,0 +1,23 @@
+<h1>ラベル作成画面</h1>
+<%= form_with(model: @label, local: true) do |form| %>
+  <% if @label.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= @label.errors.count %>件のエラーがあります。</h2>
+      <ul>
+
+      <% @label.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="label_name">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+  <%= form.submit %>
+<% end %>
+
+  <div class="new_task"><%= link_to "タスク作成画面", new_task_path, class:"btn btn-primary" %></div>
+  <div class="my_task"><%= link_to "タスク一覧", tasks_path, class:"btn btn-primary" %></div>
+  <div class="my_label"><%= link_to "ラベル一覧", labels_path, class:"btn btn-primary" %></div>

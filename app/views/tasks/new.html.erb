@@ -35,7 +35,18 @@
       <%= form.select :priority, Task.priorities.keys.map{|k| [I18n.t("enums.task.priority.#{k}"), k]}, include_blank: true %>
       <%# <%= form.select(:priority, [['低', "低"], ['中': "中"], ['高': "高"]]) %>
     </div>
+    <br>
+    <div>
+    <% Label.all.each do |label| %>
+      <%= form.check_box :label_ids, { multiple: true, checked: label[:checked], disabled: label[:disabled], include_hidden: false }, label[:id] %>
+      <label style="background-color: aquamarine"><%= label.name %></label>
+    <% end %>
+    </div>
+    <br>
     <%= form.submit(class: "btn btn-primary") %>
   <% end %>
+  <br>
 
 <%= link_to t('view.To list screen'),tasks_path, class:"btn btn-primary" %>
+<div class="new_label"><%= link_to "ラベル作成画面", new_label_path, class:"btn btn-primary" %></div>
+<div class="my_label"><%= link_to "ラベル一覧", labels_path, class:"btn btn-primary" %></div>

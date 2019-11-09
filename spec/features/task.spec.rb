@@ -5,8 +5,6 @@ require 'rails_helper'
 RSpec.feature "タスク管理機能", type: :feature do
 
   background do
-
-
     FactoryBot.create(:first_user)
     FactoryBot.create(:second_user)
     FactoryBot.create(:third_user)
@@ -27,11 +25,17 @@ RSpec.feature "タスク管理機能", type: :feature do
     expect(page).to have_content 'hello_hello'
   end
 
-  scenario "タスク作成のテスト" do
+  scenario "タスクとラベル作成のテスト" do
     visit new_session_path
     fill_in 'Email', with: 'jon@gmail.com'
     fill_in 'Password', with: '123456'
     click_on 'Log in'
+
+
+    #ラベルを作成する
+    visit new_label_path
+    fill_in 'label_name', with: 'school'
+    click_on '登録する'
 
     visit new_task_path
     #新規画面へ飛ぶ
@@ -46,10 +50,11 @@ RSpec.feature "タスク管理機能", type: :feature do
     find("option[value='not_started']").select_option
     # select 'low', from: 'priority'
     find("option[value='low']").select_option
-    fill_in 'task_author', with: 'jon'
+    check 'task_label_ids_1'
     # 「登録する」というvalue（表記文字）のあるボタンをclick_onする（クリックする）
     # 4.「登録する」というvalue（表記文字）のあるボタンをclick_onする（クリックする）する処理を書く
-    #save save_and_open_page
+    
+    
     click_on '登録する'
     # clickで登録されたはずの情報が、タスク詳細ページに表示されているかを確認する
     # （タスクが登録されたらタスク詳細画面に遷移されるという前提）
@@ -138,8 +143,7 @@ RSpec.feature "タスク管理機能", type: :feature do
     # ここにテスト内容を記載する
     visit tasks_path
 
-
-    fill_in 'search', with: 'test_task_03'
+    fill_in 'task_name_search', with: 'test_task_03'
     click_on '検索する'
 
     # fill_in 'task_task_name', with: 'test_task_01'
@@ -169,11 +173,44 @@ RSpec.feature "タスク管理機能", type: :feature do
     expect(ps[0]).to have_content 'test_task_03'
     # all('table tr')[1]. have_content 'test_task_03'
     #toは〜であること。eqは期待値と実際の値が等しいこと。beは等号、不等号を使用して値の大小を検証する時に使う。
-
-
-
-
     # bin/rspec spec/features/task.spec.rb
+  end
+
+  scenario "ラベル名で検索すると検索したものが並ぶかのテスト" do
+    visit new_session_path
+    fill_in 'Email', with: 'jon@gmail.com'
+    fill_in 'Password', with: '123456'
+    click_on 'Log in'
+    # ここにテスト内容を記載する
+
+    #ラベルを作成する
+    visit new_label_path
+    fill_in 'label_name', with: 'home'
+    
+    click_on '登録する'
+
+    visit new_task_path
+    fill_in 'task_task_name', with: 'test_task_01'
+    fill_in 'task_task_details', with: 'hello_world'
+    fill_in 'task_end_period', with: '2019-10-29'
+    find("option[value='not_started']").select_option
+    find("option[value='low']").select_option
+    check 'task_label_ids_2'
+    
+    click_on '登録する'
+
+
+    visit tasks_path
+    fill_in 'task_label_search', with: 'home'
+    click_on '検索する'
+
+    # fill_in 'task_task_name', with: 'test_task_01'
+    # click_on '登録する'
+    ps = page.all('tr td')
+
+    expect(ps[2]).to have_content 'home'
+    # all('table tr')[1]. have_content 'test_task_03'
+    #toは〜であること。eqは期待値と実際の値が等しいこと。beは等号、不等号を使用して値の大小を検証する時に使う。
   end
 
 end
