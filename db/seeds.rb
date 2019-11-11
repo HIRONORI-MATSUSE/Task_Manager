@@ -6,8 +6,32 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 User.create!(
-  name: 'test@gmail.com',
-  email: 'test@gmail.com',
-  password: '123456',
-  admin: 'true'
+  [
+    {
+      name: 'test',
+      email: 'test@gmail.com',
+      password: '123456',
+      admin: 'true'
+    },
+    {
+      name: 'test2',
+      email: 'test2@gmail.com',
+      password: '123456',
+      admin: 'false'
+    }
+  ]
+)
+
+Label.create!(
+  [
+    {
+      name: 'label_first'
+    },
+    {
+      name: 'label_second'
+    },
+    {
+      name: 'label_third'
+    }
+  ]
 )

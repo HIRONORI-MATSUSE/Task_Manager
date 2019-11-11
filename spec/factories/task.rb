@@ -9,21 +9,21 @@ FactoryBot.define do
     end_period { '2019-10-29' }
     task_status { 'not_started' }
     priority { 'low' }
-    author { 'jon' }
     user_id {1}
+    label_ids {["1"]}
   end
 
-  # 作成するテストデータの名前を「second_task」とします
-  # （存在しないクラス名の名前をつける場合、オプションで「このクラスのテストデータにしてください」と指定します）
+  #コントローラのparamsで受け取る形をする事で、別テーブルからのデータも受け取る事ができる。
   factory :second_task, class: Task do
     task_name { 'test_task_02' }
     task_details { 'hello_hello' }
     end_period { '2019-10-30' }
     task_status { 'started_in' }
     priority { 'medium' }
-    author { 'sum' }
     user_id {1}
+    label_ids {["1"]}
   end
+
 
   factory :third_task, class: Task do
     task_name { 'test_task_03' }
@@ -31,7 +31,7 @@ FactoryBot.define do
     end_period { '2019-10-31' }
     task_status { 'complete' }
     priority { 'high' }
-    author { 'alice' }
     user_id {1}
+    label_ids {["1"]}
   end
 end

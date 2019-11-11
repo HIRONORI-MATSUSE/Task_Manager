@@ -17,26 +17,38 @@
     <%= form.label :task_name %>
     <%= form.text_field :task_name, class:"form-control" %>
   </div>
+   <br>
   <div class="task_details">
     <%= form.label :task_details %>
     <%= form.text_field :task_details, class:"form-control" %>
   </div>
+   <br>
   <div class="end_period">
     <%= form.label :end_period %>
     <%= form.date_field :end_period, class:"form-control" %>
   </div>
- <div class="task_status">
+   <br>
+  <div class="task_status">
     <%= form.label :task_status %>
     <%= form.select :task_status, { 未着手: "not_started", 着手中: "started_in", 完了: "complete"} %>
   </div>
-   <div class="priority">
+   <br>
+  <div class="priority">
     <%= form.label :priority %>
     <%= form.select :priority, { 低: "row", 中: "medium", 高: "high"}%>
   </div>
+  <br>
+  <div class="labels">
+    <% Label.all.each do |label| %>
+      <%= form.check_box :label_ids, { multiple: true, checked: label[:checked], disabled: label[:disabled], include_hidden: false }, label[:id] %>
+      <label style="background-color: aquamarine"><%= label.name %></label>
+    <% end %>
+    </div>
+    <br>
   <%= form.submit %>
 <% end %>
 
 
-<%= link_to t('view.To list screen'),tasks_path %>
-<div class="new_task"><%= link_to "タスク作成画面", new_task_path %></div>
-<div class="my_task"><%= link_to "タスク一覧", tasks_path %></div>
+<%= link_to t('view.To list screen'),tasks_path, class:"btn btn-primary" %>
+<div class="new_task"><%= link_to "タスク作成画面", new_task_path, class:"btn btn-primary" %></div>
+<div class="my_task"><%= link_to "タスク一覧", tasks_path, class:"btn btn-primary" %></div>

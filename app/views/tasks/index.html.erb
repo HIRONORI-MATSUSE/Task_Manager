@@ -4,18 +4,26 @@
 
   <%= form_with(model: Task.new, local: true, method: :get) do |form| %>
 
-  <%= form.label :search, 'search' %>
-  <%= form.search_field :search %>
-  <%= form.label :status, 'status' %>
-  <% if false %>
-  <%= form.select :task_status, { 未着手: 0, 着手中: 1, 完了: 2}, include_blank: true %>
-  <% end %>
+  <%= form.label :task_name, 'タスク名' %>
+  <%= form.search_field :name_search %>
+
+
+  
+  <%= form.label :status, '状態' %>
   <%= form.select :task_status, Task.task_statuses.keys.map{|k| [I18n.t("enums.task.task_status.#{k}"), k]}, include_blank: true %>
+
+
+
+  <%= form.label :label_name, 'ラベル名' %>
+  <%# <%= form.select :label, Label.label_id,Label.all.collect { |p| [ p.name, p.id ] }, {include_blank: true}, {class: 'form-control'} %>
+
+  <%= form.search_field :label_search %>
+
+
   <%= form.submit "検索する", class:"btn btn-danger" %><br>
 
-
   <%# <h1>作成順</h1> %>
-  <%= link_to "作成順", tasks_path(cleate_at: "true"), class:"btn btn-info" %>
+  <%= link_to "作成順", tasks_path(created_at: "true"), class:"btn btn-info" %>
   <%# <h1>終了期限順</h1> %>
   <%= link_to "終了期限順", tasks_path(end_period: "true"), class:"btn btn-success" %>
   <%# <h1>優先順位順</h1> %>
@@ -27,6 +35,7 @@
     <tr class="active">
       <th><%= t('view.task_name') %></th>
       <th><%= t('view.task_details') %></th>
+      <th>ラベル</th>
       <th><%= t('view.end_period') %></th>
       <th><%= t('view.task_status') %></th>
       <th><%= t('view.priority') %></th>
@@ -39,6 +48,12 @@
       <tr class="active">
         <td><%= task.task_name %></td>
         <td><%= task.task_details %></td>
+        <td>
+          <% task.labels.each do |label_name| %>
+          <%= label_name.name %>
+          <br>
+          <% end %>
+        </td> 
         <td><%= task.end_period %></td>
         <td><%= I18n.t("enums.task.task_status.#{task.task_status}") %></td>
         <td><%= I18n.t("enums.task.priority.#{task.priority}") %></td>
@@ -52,5 +67,7 @@
 <% end %>
 
   <%= paginate @tasks %>
-  <div class="new_task"><%= link_to "タスク作成画面", new_task_path %></div>
-<div class="my_task"><%= link_to "タスク一覧", tasks_path %></div>
+
+  <div class="new_task"><%= link_to "タスク作成画面", new_task_path, class:"btn btn-primary" %></div>
+  <div class="new_label"><%= link_to "ラベル作成画面", new_label_path, class:"btn btn-primary" %></div>
+  <div class="my_label"><%= link_to "ラベル一覧", labels_path, class:"btn btn-primary" %></div>

@@ -3,41 +3,22 @@ class TasksController < ApplicationController
   before_action :authenticate_user
 
   def index
-    #reverse_orderとする事で降順で並ぶ。
-    # @tasks = Task.all.reverse_order
-
-    @tasks = current_user.tasks.order(created_at: :desc).page(params[:page]).per(5)
-    # @tasks = task_name_search(params)
-    # @tasks = task_status(params)
-
-
+    #デフォルト
+    @tasks = current_user.tasks.includes(:labels).recent
+     
     if params[:task].present?
-      #もしparamsがtaskとpriorityだった場合
-      if params[:task][:priority]
-        @tasks = current_user.tasks.where.priority(params[:task][:priority]).page(params[:page]).per(5)
-      end
-      #もしparamsがtaskとsearchだった場合
-      if params[:task][:search]
-         @tasks = current_user.tasks.task_name_search(params[:task][:search]).page(params[:page]).per(5)
-      end
-      #もしparamsがtaskとsearchかつ、#もしparamsがtaskとtask_statusだった場合
-      if params[:task][:search] && params[:task][:task_status]
-        @tasks = current_user.tasks.task_status(params[:task][:task_status]).task_name_search(params[:task][:search]).page(params[:page]).per(5)
-          # @tasks = Task.task_name_search(params[:task][:search]).where.task_status(params[:task][:task_status])
-      end
-    end
-  #もしparamsがend_periodだった場合
-    if params[:end_period]
-      @tasks = current_user.tasks.order(end_period: :desc).page(params[:page]).per(5)
-    end
-    #もしparamsがpriorityだった場合
-    if params[:priority]
-      @tasks = current_user.tasks.order(priority: :desc).page(params[:page]).per(5)
-    # else
-      # @tasks = Task.all.order(created_at: :desc).page(params[:page])
-    end
-  end
+      @tasks = @tasks.task_name_search(params[:task][:name_search]).task_status(params[:task][:task_status]).label_name_search(params[:task][:label_search])
+    end 
 
+    if params[:created_at]
+      @tasks = @tasks.reorder(created_at: :desc) 
+    elsif params[:end_period]
+      @tasks = @tasks.reorder(end_period: :desc)
+    elsif params[:priority]
+      @tasks = @tasks.reorder(priority: :desc)
+    end
+    @tasks = @tasks.page(params[:page]).per(5)
+  end
 
   def new
     @task = Task.new
@@ -46,9 +27,9 @@ class TasksController < ApplicationController
   def create
     @task = current_user.tasks.new(task_params)
     if @task.save
-    redirect_to tasks_path, notice: '作成しました'
+      redirect_to tasks_path, notice: '作成しました'
     else
-    render 'new'
+      render 'new'
     end
   end
 
@@ -71,13 +52,10 @@ class TasksController < ApplicationController
     redirect_to tasks_path, notice: '削除しました'
   end
 
-
-
-
   private
 
   def task_params
-    params.require(:task).permit(:task_name, :task_details, :end_period,:task_status, :priority)
+    params.require(:task).permit(:task_name, :task_details, :end_period, :task_status, :priority, {label_ids:[]})
   end
 
   def set_tasks

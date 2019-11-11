@@ -84,14 +84,6 @@ RSpec.feature "ユーザー管理機能", type: :feature do
     page.first(".destroy_link").click
     expect(page).to have_content 'alice'
   end
-
-
-
-
-
-
   # bin/rspec spec/features/user.spec.rb
-
-
 
 end

@@ -1,0 +1,21 @@
+<h2>ラベル一覧</h2>
+
+  <p><%= notice %></p>
+
+  <table class="table table-striped">
+    <tr class="active">
+      <th> ラベル名 </th>
+      <th> 削除 </th>
+    </tr>
+
+    <% @labels.each do |label| %>
+    <tr>
+      <td><%= label.name %></td>
+      <td><%= link_to '削除', label_path(label.id), method: :delete ,data: { confirm: '本当に削除していいですか？' } %></td>
+    </tr>
+    <% end %>
+  </table>
+
+  <div class="new_task"><%= link_to "タスク作成画面", new_task_path, class:"btn btn-primary" %></div>
+  <div class="my_task"><%= link_to "タスク一覧", tasks_path, class:"btn btn-primary" %></div>
+  <div class="new_label"><%= link_to "ラベル作成画面", new_label_path, class:"btn btn-primary" %></div>
