@@ -1,0 +1,15 @@
+current directory: /Users/matsusehironori/portfolio/everyleaf/everyleaf_mannyou/vendor/bundle/ruby/2.6.0/gems/debug_inspector-0.0.3/ext/debug_inspector
+/Users/matsusehironori/.rbenv/versions/2.6.3/bin/ruby -I /Users/matsusehironori/.rbenv/versions/2.6.3/lib/ruby/2.6.0 -r ./siteconf20191128-4859-1c3h2kp.rb extconf.rb
+creating Makefile
+
+current directory: /Users/matsusehironori/portfolio/everyleaf/everyleaf_mannyou/vendor/bundle/ruby/2.6.0/gems/debug_inspector-0.0.3/ext/debug_inspector
+make "DESTDIR=" clean
+
+current directory: /Users/matsusehironori/portfolio/everyleaf/everyleaf_mannyou/vendor/bundle/ruby/2.6.0/gems/debug_inspector-0.0.3/ext/debug_inspector
+make "DESTDIR="
+compiling debug_inspector.c
+linking shared-object debug_inspector.bundle
+
+current directory: /Users/matsusehironori/portfolio/everyleaf/everyleaf_mannyou/vendor/bundle/ruby/2.6.0/gems/debug_inspector-0.0.3/ext/debug_inspector
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 debug_inspector.bundle ./.gem.20191128-4859-1y7hugd
