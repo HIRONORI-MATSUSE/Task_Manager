@@ -71,7 +71,6 @@ RSpec.feature "ユーザー管理機能", type: :feature do
     fill_in 'メールアドレス', with: 'jon@gmail.com'
     fill_in 'パスワード', with: '123456'
     fill_in '確認用パスワード', with: '123456'
-    save_and_open_page
     click_button 'Create my account'
     expect(page).to have_content 'jon'
   end

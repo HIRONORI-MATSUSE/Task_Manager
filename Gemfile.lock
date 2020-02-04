@@ -186,6 +186,10 @@ GEM
     rb-inotify (0.10.0)
       ffi (~> 1.0)
     regexp_parser (1.6.0)
+    rename (1.0.6)
+      activesupport
+      rails (>= 3.0.0)
+      thor (>= 0.19.1)
     rspec-core (3.9.0)
       rspec-support (~> 3.9.0)
     rspec-expectations (3.9.0)
@@ -282,6 +286,7 @@ DEPENDENCIES
   rails (~> 5.2.3)
   rails-i18n (~> 5.1)
   ransack
+  rename
   rspec-rails
   sass-rails (~> 5.0)
   selenium-webdriver

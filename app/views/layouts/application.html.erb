@@ -1,17 +1,16 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>EveryleafMannyou</title>
+    <title>Task Manager</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
   <body>
     <header>
-      <div class="app_name"><%= link_to "Everyleaf_Mannyou", tasks_path %></div>
+      <div class="app_name"><%= link_to "Task Manager", tasks_path %></div>
       <div class="header_manu">
         <% if logged_in? %>
           <div class="my_page"><%= link_to "マイページ", user_path(current_user.id) %></div>
@@ -30,16 +29,18 @@
         <% end %>
       </div>
     </header>
-    <% flash.each do |key,value| %>
-    <%= content_tag(:div,value,class:"#{key}")%>
-    <% end %>
-    <main>
-       <%= yield %>
-    </main>
-      </div>
+    <div class="container">
+      <% flash.each do |key,value| %>
+      <%= content_tag(:div,value,class:"#{key}")%>
+      <% end %>
+    
+      <main>
+        <%= yield %>
+      </main>
+    </div>
     <footer>
       <div>
-        <li>Everyleaf_Mannyou</li>
+        <li>Task Manager</li>
         <li>© 2019 Copyright MATSUSE</li>
       </div>
     </footer>
